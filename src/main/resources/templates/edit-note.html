@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit</title>
+</head>
+<body>
+<form action="/note/edit" method="post">
+    <input type="text" name="title" id="title" th:value="${noteEdit.title}">
+    <input type="text" name="content" id="content" th:value="${noteEdit.content}">
+    <input type="hidden" name="id" id="id" th:value="${noteEdit.id}">
+    <button type="submit">Edit</button>
+</form>
+</body>
+</html>
