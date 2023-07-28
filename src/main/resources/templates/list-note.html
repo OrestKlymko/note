@@ -9,9 +9,14 @@
 </head>
 <body>
 <h1>Hello</h1>
-
+<form action="/note/create" method="post">
+    <input type="text" name="title">
+    <input type="text" name="content">
+    <button type="submit">Create note</button>
+</form>
 <ul>
     <li th:each="note: ${listNotes}">
+        <span th:text="${note.title}"></span>
         <span th:text="${note.content}"></span>
         <form action="/note/delete" method="post">
             <input type="hidden" name="id" th:value="${note.id}" />
