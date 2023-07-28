@@ -3,7 +3,6 @@ package com.example.controller;
 
 import com.example.crudCommand.NoteService;
 import com.example.entity.Note;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/note")
-public class TestController {
+public class NoteController {
 	private final NoteService noteService;
 
 	@GetMapping("/list")
 	public ModelAndView getAllNotes() {
-		ModelAndView modelAndView = new ModelAndView("test");
+		ModelAndView modelAndView = new ModelAndView("list-note");
 		modelAndView.addObject("listNotes", noteService.listAll());
 		return modelAndView;
 	}
@@ -43,6 +42,9 @@ public class TestController {
 
 	@PostMapping("/edit")
 	public ModelAndView completeEditNote(@RequestParam String id, String title, String content) {
+		System.out.println(id);
+		System.out.println(title);
+		System.out.println(content);
 		Note byId = noteService.getById(Long.parseLong(id));
 		byId.setTitle(title);
 		byId.setContent(content);

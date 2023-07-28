@@ -6,28 +6,38 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body>
-<h1>Hello</h1>
-<form action="/note/create" method="post">
-    <input type="text" name="title">
-    <input type="text" name="content">
-    <button type="submit">Create note</button>
-</form>
-<ul>
-    <li th:each="note: ${listNotes}">
-        <span th:text="${note.title}"></span>
-        <span th:text="${note.content}"></span>
-        <form action="/note/delete" method="post">
-            <input type="hidden" name="id" th:value="${note.id}" />
-            <button type="submit">Delete</button>
-        </form>
-        <form th:action="${'/note/edit?id='+note.id}" method="get">
-            <input type="hidden" name="id" th:value="${note.id}" />
-            <button type="submit">Edit</button>
-        </form>
-    </li>
-</ul>
+<div class="container-md">
+    <h1 style="text-align: center">Hello</h1>
+    <p style="text-align: center; margin-bottom: 10px">Create your note</p>
 
+    <form action="/note/create" method="post">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" name="title" id="title" class="form-control">
+        <label for="content" class="form-label">Content</label>
+        <input type="text" name="content" id="content" class="form-control">
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px">Create note</button>
+    </form>
+
+    <div class="list-group" th:each="note: ${listNotes}" style="margin-top: 10px">
+        <div class="list-group-item list-group-item-action d-flex justify-content-between">
+            <h5 class="mb-1" th:text="${note.title}"></h5>
+            <p class="mb-1" th:text="${note.content}"></p>
+            <div>
+                <form action="/note/delete" method="post" class="d-inline">
+                    <input type="hidden" name="id" th:value="${note.id}"/>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                <form th:action="${'/note/edit?id='+note.id}" method="get" class="d-inline">
+                    <input type="hidden" name="id" th:value="${note.id}"/>
+                    <button type="submit" class="btn btn-warning">Edit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
