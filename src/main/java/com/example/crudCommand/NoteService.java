@@ -32,10 +32,7 @@ public class NoteService {
 	}
 
 	public void update(Note note) {
-		Note byId = getById(note.getId());
-		byId.setTitle(note.getTitle());
-		byId.setContent(note.getContent());
-		noteRepository.save(byId);
+		noteRepository.save(note);
 	}
 
 	public Note getById(long id) {

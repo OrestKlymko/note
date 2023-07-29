@@ -32,23 +32,14 @@ public class NoteController {
 	}
 
 	@PostMapping("/create")
-	public ModelAndView createNote(@RequestParam("title") String title, @RequestParam("content") String content) {
-		Note note = new Note();
-		note.setTitle(title);
-		note.setContent(content);
+	public ModelAndView createNote(@RequestParam("title") String title, @RequestParam("content") String content, Note note) {
 		noteService.add(note);
 		return new ModelAndView("redirect:/note/list");
 	}
 
 	@PostMapping("/edit")
-	public ModelAndView completeEditNote(@RequestParam String id, String title, String content) {
-		System.out.println(id);
-		System.out.println(title);
-		System.out.println(content);
-		Note byId = noteService.getById(Long.parseLong(id));
-		byId.setTitle(title);
-		byId.setContent(content);
-		noteService.update(byId);
+	public ModelAndView completeEditNote(@RequestParam("title") String title, @RequestParam("content") String content, Note note) {
+		noteService.update(note);
 		return new ModelAndView("redirect:/note/list");
 	}
 
