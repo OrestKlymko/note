@@ -25,20 +25,20 @@ public class NoteController {
 	}
 
 	@GetMapping("/edit")
-	public ModelAndView editNote(@RequestParam("id") String id) {
+	public ModelAndView editNote(@RequestParam String id) {
 		ModelAndView modelAndView = new ModelAndView("edit-note");
 		modelAndView.addObject("noteEdit", noteService.getById(Long.parseLong(id)));
 		return modelAndView;
 	}
 
 	@PostMapping("/create")
-	public ModelAndView createNote(@RequestParam("title") String title, @RequestParam("content") String content, Note note) {
+	public ModelAndView createNote(Note note) {
 		noteService.add(note);
 		return new ModelAndView("redirect:/note/list");
 	}
 
 	@PostMapping("/edit")
-	public ModelAndView completeEditNote(@RequestParam("title") String title, @RequestParam("content") String content, Note note) {
+	public ModelAndView completeEditNote(Note note) {
 		noteService.update(note);
 		return new ModelAndView("redirect:/note/list");
 	}
